@@ -1,15 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
    <title>Document</title>
+   <link rel="stylesheet" href="public/style.css" />
+   <script src="public/main.js"></script>
 </head>
 
 <body>
-   <h1>Hello World</h1>
+   <form id="formField">
+      <input type="text" value="https://localhost.com" id="olderURL" placeholder="Antiga URL" />
+      <input type="text" value="https://producao.com.br" id="newURL" placeholder="Nova URL" />
+      <input type="text" value="wp" id="prefixDB" placeholder="Prefixo do Banco de Dados" />
+   </form>
+
+   <h2>Seu código</h2>
+
+   <div id="output">
+      SET @oldsite='<span id="outputOlderURL">https://localhuost.com</span>';<br>
+      SET @newsite='<span id="outputNewURL">https://producao.com.br</span>';<br>
+      UPDATE <span class="output-prefix-db">wp</span>_options SET option_value = replace(option_value, @oldsite,
+      @newsite) WHERE option_name =
+      'home' OR option_name = 'siteurl';<br>
+      UPDATE <span class="output-prefix-db">wp</span>_posts SET post_content = replace(post_content, @oldsite,
+      @newsite);<br>
+      UPDATE <span class="output-prefix-db">wp</span>_links SET link_url = replace(link_url, @oldsite, @newsite);<br>
+      UPDATE <span class="output-prefix-db">wp</span>_postmeta SET meta_value = replace(meta_value, @oldsite,
+      @newsite);<br>
+      UPDATE <span class="output-prefix-db">wp</span>_posts SET guid = replace(guid, @oldsite, @newsite);
+   </div>
 </body>
 
 </html>
