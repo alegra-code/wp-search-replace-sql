@@ -5,33 +5,44 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <title>Document</title>
-   <link rel="stylesheet" href="public/style.css" />
+   <title>WP Search and Replace SQL</title>
+   <link rel="stylesheet" href="public/retro.css" />
    <script src="public/main.js"></script>
 </head>
 
 <body>
-   <form id="formField">
-      <input type="text" value="https://localhost.com" id="olderURL" placeholder="Antiga URL" />
-      <input type="text" value="https://producao.com.br" id="newURL" placeholder="Nova URL" />
-      <input type="text" value="wp" id="prefixDB" placeholder="Prefixo do Banco de Dados" />
-   </form>
 
-   <h2>Seu código</h2>
+   <main class="container">
 
-   <div id="output">
-      SET @oldsite='<span id="outputOlderURL">https://localhuost.com</span>';<br>
-      SET @newsite='<span id="outputNewURL">https://producao.com.br</span>';<br>
-      UPDATE <span class="output-prefix-db">wp</span>_options SET option_value = replace(option_value, @oldsite,
-      @newsite) WHERE option_name =
-      'home' OR option_name = 'siteurl';<br>
-      UPDATE <span class="output-prefix-db">wp</span>_posts SET post_content = replace(post_content, @oldsite,
-      @newsite);<br>
-      UPDATE <span class="output-prefix-db">wp</span>_links SET link_url = replace(link_url, @oldsite, @newsite);<br>
-      UPDATE <span class="output-prefix-db">wp</span>_postmeta SET meta_value = replace(meta_value, @oldsite,
-      @newsite);<br>
-      UPDATE <span class="output-prefix-db">wp</span>_posts SET guid = replace(guid, @oldsite, @newsite);
-   </div>
+      <h1>WP Search and Replace SQL</h1>
+      <p class="description">Ferramenta para alterar "strings" no banco de dados (WordPress), normalmente usada para migrar sites alterando o domínio, por exemplo migrando um site de um ambiente de desenvolvimento para a produção.</p>
+
+      <form id="formField" class="form-fields">
+         <input type="text" value="https://localhost.com" id="olderURL" placeholder="Antiga URL" />
+         <input type="text" value="https://producao.com.br" id="newURL" placeholder="Nova URL" />
+         <input type="text" value="wp" id="prefixDB" placeholder="Prefixo do Banco de Dados" />
+      </form><!-- /.form-fields -->
+
+      <h2>Seu SQL</h2>
+      <p class="description">Copie o código abaixo, acesse seu PHPMyAdmin, escolha o banco de dados e na aba "SQL" cole o código abaixo e execute!</p>
+
+      <div id="output" class="output-code">
+         SET @oldsite='<span id="outputOlderURL" class="highlighted-code">https://localhost.com</span>';<br>
+         SET @newsite='<span id="outputNewURL" class="highlighted-code">https://producao.com.br</span>';<br>
+         UPDATE <span class="output-prefix-db highlighted-code">wp</span>_options SET option_value = replace(option_value, @oldsite,
+         @newsite) WHERE option_name =
+         'home' OR option_name = 'siteurl';<br>
+         UPDATE <span class="output-prefix-db highlighted-code">wp</span>_posts SET post_content = replace(post_content, @oldsite,
+         @newsite);<br>
+         UPDATE <span class="output-prefix-db highlighted-code">wp</span>_links SET link_url = replace(link_url, @oldsite, @newsite);<br>
+         UPDATE <span class="output-prefix-db highlighted-code">wp</span>_postmeta SET meta_value = replace(meta_value, @oldsite,
+         @newsite);<br>
+         UPDATE <span class="output-prefix-db highlighted-code">wp</span>_posts SET guid = replace(guid, @oldsite, @newsite);
+      </div><!-- /.output-code -->
+
+      <p class="contributors"><a href="https://ofrontender.dev/">Junior Marques</a> <a href="https://everaldo.dev">Everaldo Matias</a></p>
+
+   </main><!-- /..container -->
 </body>
 
 </html>
