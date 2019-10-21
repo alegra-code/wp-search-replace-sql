@@ -1,28 +1,32 @@
-window.addEventListener('load', function () {
-    let olderURL = document.getElementById('olderURL');
-    let newURL = document.getElementById('newURL');
-    let prefixDB = document.getElementById('prefixDB');
+window.addEventListener("load", function() {
+    let olderURL = document.getElementById("olderURL");
+    let newURL = document.getElementById("newURL");
+    let prefixDB = document.getElementById("prefixDB");
 
-    let outputOlderURL = document.getElementById('outputOlderURL');
-    let outputNewURL = document.getElementById('outputNewURL');
-    let outputPrefixDB = document.getElementsByClassName('output-prefix-db');
+    let outputOlderURL = document.getElementsByClassName("output-older-url");
+    let outputNewURL = document.getElementsByClassName("output-new-url");
+    let outputPrefixDB = document.getElementsByClassName("output-prefix-db");
 
     function updateValueOutput(input, output) {
         output.innerText = input;
     }
 
-    olderURL.addEventListener('input', function () {
-        updateValueOutput(olderURL.value, outputOlderURL);
+    olderURL.addEventListener("input", function() {
+        [].forEach.call(outputOlderURL, e => {
+            updateValueOutput(olderURL.value, e);
+        });
     });
 
-    newURL.addEventListener('input', function () {
-        updateValueOutput(newURL.value, outputNewURL);
+    newURL.addEventListener("input", function() {
+        [].forEach.call(outputNewURL, e => {
+            updateValueOutput(newURL.value, e);
+        });
     });
 
-    prefixDB.addEventListener('input', function () {
-        [].forEach.call(outputPrefixDB, (e) => {
+    prefixDB.addEventListener("input", function() {
+        [].forEach.call(outputPrefixDB, e => {
             updateValueOutput(prefixDB.value, e);
-        })
+        });
     });
 
     const $insertCustomFields = document.getElementById("insertCustomFields");
@@ -35,23 +39,38 @@ window.addEventListener('load', function () {
 
     let i = 0;
     $insertCustomFields.addEventListener("click", () => {
-        $formField.insertAdjacentHTML("beforeend", `
+        $formField.insertAdjacentHTML(
+            "beforeend",
+            `
             <input type="text" value="oi" id="customTable${i}" placeholder="Insira o nome da tabela" />
-        `);
-        $output.insertAdjacentHTML("beforeend", `
-            <br />UPDATE <span class="output-prefix-db highlighted-code">wp</span>_<span id="teste1">${document.getElementById(`customTable${i}`).value}</span> SET guid = replace(guid, @lore, @ips);
-        `);
+        `
+        );
+        $output.insertAdjacentHTML(
+            "beforeend",
+            `
+            <br />UPDATE <span class="output-prefix-db highlighted-code">wp</span>_<span id="teste1">${
+                document.getElementById(`customTable${i}`).value
+            }</span> SET <span class="">guid</span> = replace(<span class="">guid</span>, @lore, @ips);
 
-        watchingCustomField(`${document.getElementById(`customTable${i}`).value}`);
+            // UPDATE
+            //     <span class="output-prefix-db highlighted-code">wp</span>_posts
+            //     SET guid = replace(guid, '<span class="output-older-url">https://producao.com.br</span>', '<span class="output-new-url">https://localhost.com</span>');
+        `
+        );
+        console.log(document.getElementById(`customTable${i}`).value);
+
+        document
+            .getElementById(`customTable${i}`)
+            .addEventListener("input", function() {
+                updateValueOutput(
+                    document.getElementById(`customTable${i}`).value,
+                    document.getElementById("teste1").innerText
+                );
+            });
+        function guardarValor() {
+            const inputPers = document.getElementById(`customTable${i}`);
+        }
 
         i++;
     });
-
-    function watchingCustomField(elment) {
-        [].forEach.call(document.querySelectorAll("input"), (e) => {
-            e.addEventListener("input", () => {
-                updateCustomTable(elment, document.querySelector("#teste1"));
-            });
-        });
-    }
-})
+});
