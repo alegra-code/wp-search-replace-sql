@@ -34,7 +34,11 @@ window.addEventListener("load", function() {
     const $output = document.getElementById("output");
 
     function updateCustomTable(input, output) {
-        output.innerText = input;
+        input.addEventListener("input", () => {
+            updateValueOutput(input.value, output);
+            console.log("dentro");
+        });
+        console.log("fora");
     }
 
     let i = 0;
@@ -48,29 +52,18 @@ window.addEventListener("load", function() {
         $output.insertAdjacentHTML(
             "beforeend",
             `
-            <br />UPDATE <span class="output-prefix-db highlighted-code">wp</span>_<span id="teste1">${
-                document.getElementById(`customTable${i}`).value
-            }</span> SET <span class="">guid</span> = replace(<span class="">guid</span>, @lore, @ips);
+            <br />UPDATE <span class="output-prefix-db highlighted-code">wp</span>_<span id="teste1">oi</span> SET <span class="">guid</span> = replace(<span class="">guid</span>, @lore, @ips);
 
             // UPDATE
             //     <span class="output-prefix-db highlighted-code">wp</span>_posts
             //     SET guid = replace(guid, '<span class="output-older-url">https://producao.com.br</span>', '<span class="output-new-url">https://localhost.com</span>');
         `
         );
-        console.log(document.getElementById(`customTable${i}`).value);
 
-        document
-            .getElementById(`customTable${i}`)
-            .addEventListener("input", function() {
-                updateValueOutput(
-                    document.getElementById(`customTable${i}`).value,
-                    document.getElementById("teste1").innerText
-                );
-            });
-        function guardarValor() {
-            const inputPers = document.getElementById(`customTable${i}`);
-        }
-
+        updateCustomTable(
+            document.getElementById(`customTable${i}`),
+            document.getElementById("teste1")
+        );
         i++;
     });
 });
