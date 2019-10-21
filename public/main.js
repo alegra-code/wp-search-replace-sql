@@ -36,9 +36,7 @@ window.addEventListener("load", function() {
     function updateCustomTable(input, output) {
         input.addEventListener("input", () => {
             updateValueOutput(input.value, output);
-            console.log("dentro");
         });
-        console.log("fora");
     }
 
     let i = 0;

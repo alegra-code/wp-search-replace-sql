@@ -57,37 +57,33 @@
                 >';<br /> -->
                 UPDATE
                 <span class="output-prefix-db highlighted-code">wp</span
-                >_options SET option_value = replace(option_value, '<span
-                    class="output-older-url"
-                    >https://producao.com.br</span
-                >', '<span class="output-new-url">https://localhost.com</span>')
-                WHERE option_name = 'home' OR option_name = 'siteurl';<br />
+                >_options SET option_value = replace(option_value,
+                <span class="output-older-url">https://producao.com.br</span>,
+                <span class="output-new-url">https://localhost.com</span>) WHERE
+                option_name = 'home' OR option_name = 'siteurl';<br />
                 UPDATE
                 <span class="output-prefix-db highlighted-code">wp</span>_posts
-                SET post_content = replace(post_content, '<span
-                    class="output-older-url"
-                    >https://producao.com.br</span
-                >', '<span class="output-new-url">https://localhost.com</span
-                >');<br />
+                SET post_content = replace(post_content,
+                <span class="output-older-url">https://producao.com.br</span>,
+                <span class="output-new-url">https://localhost.com</span
+                >);<br />
                 UPDATE
                 <span class="output-prefix-db highlighted-code">wp</span>_links
-                SET link_url = replace(link_url, '<span class="output-older-url"
-                    >https://producao.com.br</span
-                >', '<span class="output-new-url">https://localhost.com</span
-                >');<br />
+                SET link_url = replace(link_url,
+                <span class="output-older-url">https://producao.com.br</span>,
+                <span class="output-new-url">https://localhost.com</span
+                >);<br />
                 UPDATE
                 <span class="output-prefix-db highlighted-code">wp</span
-                >_postmeta SET meta_value = replace(meta_value, '<span
-                    class="output-older-url"
-                    >https://producao.com.br</span
-                >', '<span class="output-new-url">https://localhost.com</span
-                >');<br />
+                >_postmeta SET meta_value = replace(meta_value,
+                <span class="output-older-url">https://producao.com.br</span>,
+                <span class="output-new-url">https://localhost.com</span
+                >);<br />
                 UPDATE
                 <span class="output-prefix-db highlighted-code">wp</span>_posts
-                SET guid = replace(guid, '<span class="output-older-url"
-                    >https://producao.com.br</span
-                >', '<span class="output-new-url">https://localhost.com</span
-                >');
+                SET guid = replace(guid,
+                <span class="output-older-url">https://producao.com.br</span>,
+                <span class="output-new-url">https://localhost.com</span>);
             </div>
             <!-- /.output-code -->
 
