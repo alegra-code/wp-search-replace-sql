@@ -1,4 +1,4 @@
-window.addEventListener("load", function() {
+window.addEventListener("load", function () {
     let olderURL = document.getElementById("olderURL");
     let newURL = document.getElementById("newURL");
     let prefixDB = document.getElementById("prefixDB");
@@ -11,19 +11,19 @@ window.addEventListener("load", function() {
         output.innerText = input;
     }
 
-    olderURL.addEventListener("input", function() {
+    olderURL.addEventListener("input", function () {
         [].forEach.call(outputOlderURL, e => {
             updateValueOutput(olderURL.value, e);
         });
     });
 
-    newURL.addEventListener("input", function() {
+    newURL.addEventListener("input", function () {
         [].forEach.call(outputNewURL, e => {
             updateValueOutput(newURL.value, e);
         });
     });
 
-    prefixDB.addEventListener("input", function() {
+    prefixDB.addEventListener("input", function () {
         [].forEach.call(outputPrefixDB, e => {
             updateValueOutput(prefixDB.value, e);
         });
@@ -44,23 +44,20 @@ window.addEventListener("load", function() {
         $formField.insertAdjacentHTML(
             "beforeend",
             `
-            <input type="text" value="oi" id="customTable${i}" placeholder="Insira o nome da tabela" />
+            <input class="customs-input" type="text" value="" id="customTable${i}" placeholder="Prefixo do Banco de Dados" />
+            <input class="customs-input" type="text" value="" id="customField${i}" placeholder="Insira o nome da tabela" />
         `
         );
         $output.insertAdjacentHTML(
             "beforeend",
             `
-            <br />UPDATE <span class="output-prefix-db highlighted-code">wp</span>_<span id="teste1">oi</span> SET <span class="">guid</span> = replace(<span class="">guid</span>, @lore, @ips);
-
-            // UPDATE
-            //     <span class="output-prefix-db highlighted-code">wp</span>_posts
-            //     SET guid = replace(guid, '<span class="output-older-url">https://producao.com.br</span>', '<span class="output-new-url">https://localhost.com</span>');
+            <br />UPDATE <span class="output-prefix-db highlighted-code">wp</span>_<span id="table${i}"></span> SET <span class="field-0${i}"></span> = replace(<span class="field-0${i}"></span>, @lore, @ips);
         `
         );
 
         updateCustomTable(
             document.getElementById(`customTable${i}`),
-            document.getElementById("teste1")
+            document.getElementById(`table${i}`)
         );
         i++;
     });
