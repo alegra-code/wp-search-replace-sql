@@ -41,6 +41,14 @@ window.addEventListener("load", function() {
         });
     }
 
+    function updateCustomTableArr(input, outputArr) {
+        input.addEventListener("input", () => {
+            [].forEach.call(outputArr, eachOutput => {
+                updateValueOutput(input.value, eachOutput);
+            });
+        });
+    }
+
     let i = 0;
     $insertCustomFields.addEventListener("click", () => {
         $formField.insertAdjacentHTML(
@@ -61,17 +69,23 @@ window.addEventListener("load", function() {
             document.getElementById(`customTable${i}`),
             document.getElementById(`table${i}`)
         );
-        updateCustomTable(
+        updateCustomTableArr(
             document.getElementById(`customField${i}`),
-            document.getElementById(`field${i}`)
+            document.getElementsByClassName(`field-0${i}`)
         );
         i++;
+
+        let getAllInput = document.querySelectorAll("input");
 
         const alertMessage = document.getElementById("alertMessage");
         const closeMessage = document.getElementById("closeMessage");
 
         outputWrapper.addEventListener("mouseover", () => {
-            alertMessage.classList.add("-show");
+            [].forEach.call(getAllInput, eachInput => {
+                if (!eachInput.value.length) {
+                    alertMessage.classList.add("-show");
+                }
+            });
         });
 
         closeMessage.addEventListener("click", () => {
