@@ -48,12 +48,16 @@ window.addEventListener("load", function() {
         );
         $output.insertAdjacentHTML(
             "beforeend",
-            `<br />UPDATE <span class="output-prefix-db highlighted-code">${prefixDB.value}</span>_<span id="table${i}"></span> SET <span class="field-0${i}"></span> = replace(<span class="field-0${i}"></span>, ${olderURL.value}, ${newURL.value});`
+            `<br />UPDATE <span class="output-prefix-db highlighted-code">${prefixDB.value}</span>_<span id="table${i}"></span> SET <span class="field-0${i}"></span> = replace(<span id="field${i}" class="field-0${i}">ooi</span>, ${olderURL.value}, ${newURL.value});`
         );
 
         updateCustomTable(
             document.getElementById(`customTable${i}`),
             document.getElementById(`table${i}`)
+        );
+        updateCustomTable(
+            document.getElementById(`customField${i}`),
+            document.getElementById(`field${i}`)
         );
         i++;
     });
