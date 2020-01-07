@@ -1,11 +1,13 @@
 window.addEventListener("load", function() {
-    let olderURL = document.getElementById("olderURL");
-    let newURL = document.getElementById("newURL");
-    let prefixDB = document.getElementById("prefixDB");
+    const outputWrapper = document.getElementById("output");
 
-    let outputOlderURL = document.getElementsByClassName("output-older-url");
-    let outputNewURL = document.getElementsByClassName("output-new-url");
-    let outputPrefixDB = document.getElementsByClassName("output-prefix-db");
+    const olderURL = document.getElementById("olderURL");
+    const newURL = document.getElementById("newURL");
+    const prefixDB = document.getElementById("prefixDB");
+
+    const outputOlderURL = document.getElementsByClassName("output-older-url");
+    const outputNewURL = document.getElementsByClassName("output-new-url");
+    const outputPrefixDB = document.getElementsByClassName("output-prefix-db");
 
     function updateValueOutput(input, output) {
         output.innerText = input;
@@ -43,12 +45,16 @@ window.addEventListener("load", function() {
     $insertCustomFields.addEventListener("click", () => {
         $formField.insertAdjacentHTML(
             "beforeend",
-            `<input class="customs-input" type="text" value="" id="customTable${i}" placeholder="Prefixo do Banco de Dados" />
-            <input class="customs-input" type="text" value="" id="customField${i}" placeholder="Insira o nome da tabela" />`
+            `<div class="customs-input-wrapper">
+                <input class="customs-input" type="text" value="" id="customTable${i}" placeholder="Insira o nome da tabela personalizada" />
+                <input class="customs-input" type="text" value="" id="customField${i}" placeholder="Insira o nome da variável personalizada" />
+            </div>`
         );
         $output.insertAdjacentHTML(
             "beforeend",
-            `<br />UPDATE <span class="output-prefix-db highlighted-code">${prefixDB.value}</span>_<span id="table${i}"></span> SET <span class="field-0${i}"></span> = replace(<span id="field${i}" class="field-0${i}">ooi</span>, ${olderURL.value}, ${newURL.value});`
+            `<span class="custom-output-wrapper">
+                <br />UPDATE <span class="output-prefix-db highlighted-code">${prefixDB.value}</span>_<span id="table${i}"></span> SET <span class="field-0${i}"></span> = replace(<span id="field${i}" class="field-0${i}">@</span>, ${olderURL.value}, ${newURL.value});
+            </span>`
         );
 
         updateCustomTable(
@@ -60,5 +66,16 @@ window.addEventListener("load", function() {
             document.getElementById(`field${i}`)
         );
         i++;
+
+        const alertMessage = document.getElementById("alertMessage");
+        const closeMessage = document.getElementById("closeMessage");
+
+        outputWrapper.addEventListener("mouseover", () => {
+            alertMessage.classList.add("-show");
+        });
+
+        closeMessage.addEventListener("click", () => {
+            alertMessage.classList.remove("-show");
+        });
     });
 });

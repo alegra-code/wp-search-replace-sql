@@ -1,73 +1,111 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>WP Search and Replace SQL</title>
+        <link rel="stylesheet" href="public/basic.css" />
+        <script src="public/main.js"></script>
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>WP Search and Replace SQL</title>
-    <link rel="stylesheet" href="public/basic.css" />
-    <script src="public/main.js"></script>
-</head>
+    <body>
+        <main class="container">
+            <h1>WP Search and Replace SQL</h1>
+            <p class="description">
+                Ferramenta para alterar "strings" no banco de dados (WordPress),
+                normalmente usada para migrar sites alterando o domínio, por
+                exemplo migrando um site de um ambiente de desenvolvimento para
+                a produção.
+            </p>
 
-<body>
-    <main class="container">
-        <h1>WP Search and Replace SQL</h1>
-        <p class="description">
-            Ferramenta para alterar "strings" no banco de dados (WordPress),
-            normalmente usada para migrar sites alterando o domínio, por
-            exemplo migrando um site de um ambiente de desenvolvimento para
-            a produção.
-        </p>
+            <form id="formField" class="form-fields">
+                <input
+                    type="text"
+                    value="https://localhost.com"
+                    id="olderURL"
+                    placeholder="Antiga URL"
+                    autofocus
+                />
+                <input
+                    type="text"
+                    value="https://producao.com.br"
+                    id="newURL"
+                    placeholder="Nova URL"
+                />
+                <input
+                    type="text"
+                    value="wp"
+                    id="prefixDB"
+                    placeholder="Prefixo do Banco de Dados"
+                />
+            </form>
+            <!-- /.form-fields -->
 
-        <form id="formField" class="form-fields">
-            <input type="text" value="https://localhost.com" id="olderURL" placeholder="Antiga URL" autofocus />
-            <input type="text" value="https://producao.com.br" id="newURL" placeholder="Nova URL" />
-            <input type="text" value="wp" id="prefixDB" placeholder="Prefixo do Banco de Dados" />
-        </form>
-        <!-- /.form-fields -->
-        <button id="insertCustomFields">oi</button>
+            <!-- TODO adicionar um texto explicando para o usuário o que esse botão fará -->
+            <button id="insertCustomFields" class="insert-custom-fields">
+                Adicionar tabela personalizada
+            </button>
+            <!-- TODO adicionar um texto explicando para o usuário o que esse botão fará -->
 
-        <h2>Seu SQL</h2>
-        <p class="description">
-            Copie o código abaixo, acesse seu PHPMyAdmin, escolha o banco de
-            dados e na aba "SQL" cole o código abaixo e execute!
-        </p>
+            <h2>Seu SQL</h2>
+            <p class="description">
+                Copie o código abaixo, acesse seu PHPMyAdmin, escolha o banco de
+                dados e na aba "SQL" cole o código abaixo e execute!
+            </p>
 
-        <div id="output" class="output-code">
-            UPDATE
-            <span class="output-prefix-db highlighted-code">wp</span>_options SET option_value = replace(option_value,
-            <span class="output-older-url">https://producao.com.br</span>,
-            <span class="output-new-url">https://localhost.com</span>) WHERE
-            option_name = 'home' OR option_name = 'siteurl';<br />
-            UPDATE
-            <span class="output-prefix-db highlighted-code">wp</span>_posts
-            SET post_content = replace(post_content,
-            <span class="output-older-url">https://producao.com.br</span>,
-            <span class="output-new-url">https://localhost.com</span>);<br />
-            UPDATE
-            <span class="output-prefix-db highlighted-code">wp</span>_links
-            SET link_url = replace(link_url,
-            <span class="output-older-url">https://producao.com.br</span>,
-            <span class="output-new-url">https://localhost.com</span>);<br />
-            UPDATE
-            <span class="output-prefix-db highlighted-code">wp</span>_postmeta SET meta_value = replace(meta_value,
-            <span class="output-older-url">https://producao.com.br</span>,
-            <span class="output-new-url">https://localhost.com</span>);<br />
-            UPDATE
-            <span class="output-prefix-db highlighted-code">wp</span>_posts
-            SET guid = replace(guid,
-            <span class="output-older-url">https://producao.com.br</span>,
-            <span class="output-new-url">https://localhost.com</span>);
-        </div>
-        <!-- /.output-code -->
+            <div id="output" class="output-code">
+                UPDATE
+                <span class="output-prefix-db highlighted-code">wp</span
+                >_options SET option_value = replace(option_value,
+                <span class="output-older-url">https://producao.com.br</span>,
+                <span class="output-new-url">https://localhost.com</span>) WHERE
+                option_name = 'home' OR option_name = 'siteurl';<br />
+                UPDATE
+                <span class="output-prefix-db highlighted-code">wp</span>_posts
+                SET post_content = replace(post_content,
+                <span class="output-older-url">https://producao.com.br</span>,
+                <span class="output-new-url">https://localhost.com</span
+                >);<br />
+                UPDATE
+                <span class="output-prefix-db highlighted-code">wp</span>_links
+                SET link_url = replace(link_url,
+                <span class="output-older-url">https://producao.com.br</span>,
+                <span class="output-new-url">https://localhost.com</span
+                >);<br />
+                UPDATE
+                <span class="output-prefix-db highlighted-code">wp</span
+                >_postmeta SET meta_value = replace(meta_value,
+                <span class="output-older-url">https://producao.com.br</span>,
+                <span class="output-new-url">https://localhost.com</span
+                >);<br />
+                UPDATE
+                <span class="output-prefix-db highlighted-code">wp</span>_posts
+                SET guid = replace(guid,
+                <span class="output-older-url">https://producao.com.br</span>,
+                <span class="output-new-url">https://localhost.com</span>);
+            </div>
+            <!-- /.output-code -->
 
-        <p class="contributors">
-            <a href="https://ofrontender.dev/">Junior Marques</a>
-            <a href="https://everaldo.dev">Everaldo Matias</a>
-        </p>
-    </main>
-    <!-- /..container -->
-</body>
+            <div id="alertMessage" class="alert-message">
+                <span id="closeMessage" class="close-message">X</span>
 
+                <h2>Opa! Você está indo depressa demais.</h2>
+                <img src="./public/img/abort.png" alt="Pare" />
+
+                <mark>
+                    Você copiou o script, mas não preencheu os campos
+                    personalizados antes.
+                </mark>
+            </div>
+
+            <!-- /.Alert message -->
+
+            <p class="contributors">
+                <a href="https://ofrontender.dev/">Junior Marques</a>
+                <a href="https://everaldo.dev">Everaldo Matias</a>
+            </p>
+        </main>
+        <!-- /..container -->
+    </body>
 </html>
